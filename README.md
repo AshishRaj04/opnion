@@ -10,7 +10,7 @@
 2. Open Terminal / Command Prompt and clone this repository into your local machine using the command.
 
 ```bash
-git clone https://github.com/sarthakpranesh/Opinion-
+git clone https://github.com/AshishRaj04/opnion.git
 ```
 
 3. Navigate to the root directory and run this command to install all the npm dependencies required for running
@@ -35,4 +35,4 @@ Please make sure to update tests as appropriate.
 
 ## My Blog
 
-[My blog](bharatgkblog.com)
+[My blog](https://bharatgkblog.com/)

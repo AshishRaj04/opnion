@@ -21,10 +21,8 @@ app.use(express.static("public"))
 
 app.use(cookieParser())
 
-import {jokes} from "./constants.js"
+import tweetRouter from "./routes/index.js"
 
-app.get('/', (req, res) => {
-    res.json(jokes)
-  })
+app.use("/home" , tweetRouter)
 
 export {app}

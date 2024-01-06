@@ -1,6 +1,6 @@
 import { Tweet } from "../modles/tweet.model.js";
-import mongoose from "mongoose";
 import { ApiError } from "../utils/apiError.js";
+import { ApiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 const postTweet = asyncHandler(async (req, res) => {
@@ -21,9 +21,9 @@ const postTweet = asyncHandler(async (req, res) => {
       throw new ApiError(502, "Server Error");
     }
 
-    return res.status(200).json({
-      data: newTweet,
-    });
+    return res
+      .status(200)
+      .json(new ApiResponse(200, newTweet, "Tweet has been added"));
   } catch (err) {
     console.log("Error in posting tweet : ", err);
   }

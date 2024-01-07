@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios";
 const Home = () => {
-  const url = "http://localhost:4000/home";
+  const url = "/home";
   const [tweet, setTweet] = useState(" ");
 
   const handleChange = (event) => {

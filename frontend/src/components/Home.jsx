@@ -29,12 +29,13 @@ const Home = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <textarea
-          placeholder=""
           onChange={handleChange}
-          className="text-slate-800"
+          className="text-slate-800 block w-[400px] h-40 outline-none rounded-md my-8"
           value={tweet}
         />
-        <button>POST</button>
+        <button className="px-4 py-2 rounded-3xl bg-blue-700 font-bold text-center">
+          POST
+        </button>
       </form>
     </div>
   );

@@ -1,13 +1,18 @@
-import {Home , Navbar} from "./components";
+import { Home, Navbar, Sidebar, Feed } from "./components";
 
 function App() {
   return (
     <>
-      <div>
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
-        <h2>This is Ashish Raj</h2>
+      <nav>
+        <Navbar />
+      </nav>
+      <div className="flex gap-2 flex-row">
+        <Sidebar />
+        <div className="flex gap-2 flex-col">
+          <Home />
+          <Feed />
+        </div>
       </div>
-      <Home />
     </>
   );
 }

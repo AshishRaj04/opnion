@@ -21,8 +21,11 @@ app.use(express.static("public"))
 
 app.use(cookieParser())
 
-import tweetRouter from "./routes/index.js"
+import tweetRouter from "./routes/tweet.router.js"
+import userRouter from "./routes/user.router.js"
 
+app.use("/api/v1" , userRouter)
 app.use("/home" , tweetRouter)
+
 
 export {app}

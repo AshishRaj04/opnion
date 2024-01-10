@@ -13,9 +13,11 @@ const postTweet = asyncHandler(async (req, res) => {
       throw new ApiError(401, "Tweet is empty");
     }
 
-    const newTweet = await Tweet.create({
+    const createdTweet = await Tweet.create({
       content: content,
     });
+
+    const newTweet = await Tweet.findById(createdTweet._id)
 
     if (!newTweet) {
       throw new ApiError(502, "Server Error");

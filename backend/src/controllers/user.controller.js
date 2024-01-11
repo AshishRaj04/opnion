@@ -10,6 +10,20 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import fs from "fs";
 
+const generateAccessAndRefreshToken = async (userId) => {
+  try {
+    const user = await User.findById(userId);
+    const accessToken = user.generateAccessToken();
+    const refreshToken = user.generateRefreshToken();
+    user.refreshToken = refreshToken;
+    await user.save({ validateBeforeSave: false });
+
+    return { accessToken, refreshToken };
+  } catch (error) {
+    throw new ApiError(500, "Internal server error");
+  }
+};
+
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, fullName, password } = req.body;
 
@@ -74,8 +88,7 @@ const loginUser = asyncHandler(async (req, res) => {
   if (!(email && password)) {
     throw new ApiError(401, "email and password are required");
   }
-  const existingUser = await User.findOne(email);
-  const user = User.findById(existingUser._id);
+  const existingUser = await User.findOne({ email });
 
   if (!existingUser) {
     throw new ApiError(401, "Invalid credentials");
@@ -87,10 +100,9 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(401, "Invalid Password");
   }
 
-  const accessToken = user.generateAccessToken();
-  const refreshToken = user.generateRefreshToken();
-  user.refreshToken = refreshToken;
-  await user.save({ validateBeforeSave: false });
+  const { accessToken, refreshToken } = generateAccessAndRefreshToken(
+    existingUser._id
+  );
 
   const loggedInUser = await User.findById(existingUser._id).select(
     "-password  -refreshToken"
@@ -118,4 +130,29 @@ const loginUser = asyncHandler(async (req, res) => {
     );
 });
 
-export { registerUser, loginUser };
+
+const logoutUser = asyncHandler(async (req, res) => {
+  await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      $set: {
+        refreshToken: undefined,
+      },
+    },
+    {
+      new: true,
+    }
+  );
+
+  const option = {
+    httpOnly: true,
+    secure: true,
+  };
+
+  res
+    .status(200)
+    .clearCookie("accessToken", option)
+    .clearCookie("refreshToken", option)
+    .json(new ApiResponse(200, {}, "User logged out"));
+});
+export { registerUser, loginUser , logoutUser};

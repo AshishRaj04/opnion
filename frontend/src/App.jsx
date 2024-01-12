@@ -1,4 +1,4 @@
-import { Home, Navbar, Sidebar, Feed } from "./components";
+import { Home, Navbar, Sidebar, Feed , Login ,Register} from "./components";
 
 function App() {
   return (
@@ -11,6 +11,8 @@ function App() {
         <div className="flex gap-2 flex-col">
           <Home />
           <Feed />
+          <Login />
+          <Register />
         </div>
       </div>
     </>

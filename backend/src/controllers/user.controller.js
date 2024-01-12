@@ -18,6 +18,9 @@ const generateAccessAndRefreshToken = async (userId) => {
     user.refreshToken = refreshToken;
     await user.save({ validateBeforeSave: false });
 
+    console.log(accessToken)
+    console.log(refreshToken)
+
     return { accessToken, refreshToken };
   } catch (error) {
     throw new ApiError(500, "Internal server error");

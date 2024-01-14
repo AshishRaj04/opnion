@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState , useEffect} from "react";
 import Axios from "axios";
 const Home = () => {
   const url = "/home";
@@ -14,7 +14,7 @@ const Home = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!tweet || tweet.trim() === "") return;
-    // Make a POST request to the server endpoint
+    
     Axios.post(url, {
       content: tweet,
     })

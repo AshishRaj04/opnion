@@ -18,9 +18,6 @@ const generateAccessAndRefreshToken = async (userId) => {
     user.refreshToken = refreshToken;
     await user.save({ validateBeforeSave: false });
 
-    console.log(accessToken)
-    console.log(refreshToken)
-
     return { accessToken, refreshToken };
   } catch (error) {
     throw new ApiError(500, "Internal server error");
@@ -103,9 +100,12 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(401, "Invalid Password");
   }
 
-  const { accessToken, refreshToken } = generateAccessAndRefreshToken(
+  const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
     existingUser._id
   );
+
+  console.log("accessToken :-", accessToken);
+  console.log("refreshToken :-", refreshToken);
 
   const loggedInUser = await User.findById(existingUser._id).select(
     "-password  -refreshToken"
@@ -133,7 +133,6 @@ const loginUser = asyncHandler(async (req, res) => {
     );
 });
 
-
 const logoutUser = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(
     req.user._id,
@@ -158,4 +157,4 @@ const logoutUser = asyncHandler(async (req, res) => {
     .clearCookie("refreshToken", option)
     .json(new ApiResponse(200, {}, "User logged out"));
 });
-export { registerUser, loginUser , logoutUser};
+export { registerUser, loginUser, logoutUser };

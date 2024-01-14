@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -8,6 +9,8 @@ const Login = () => {
   });
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,9 +29,15 @@ const Login = () => {
         setIsLoggedIn(true);
       });
     } catch (error) {
-      console.log("Error occured while logging the user");
+      console.log("Error occured while logging the user ", error);
     }
   };
+
+  useEffect(()=>{
+    if(isLoggedIn){
+      navigate('/home')
+    }
+  },[isLoggedIn])
   return (
     <>
       <div>
@@ -40,7 +49,7 @@ const Login = () => {
             placeholder="email"
             name="email"
             className="my-2  text-slate-900"
-            value={data.password}
+            value={data.email}
             onChange={handleChange}
           ></input>
           <br />

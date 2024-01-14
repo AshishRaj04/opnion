@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [data, setData] = useState({
@@ -9,7 +10,7 @@ const Register = () => {
     fullName: "",
   });
   const [isRegistered, setIsRegistered] = useState(false);
-
+  const navigate = useNavigate();
   const handleChange = (event) => {
     const { name, value } = event.target;
     setData((prevData) => ({ ...prevData, [name]: value }));
@@ -29,6 +30,13 @@ const Register = () => {
       console.log("Error occuring while registering the user : ", error);
     }
   };
+
+  useEffect(() => {
+    if (isRegistered) {
+      navigate("/login");
+    }
+  }, [isRegistered]);
+
   return (
     <div>
       <p>Register</p>

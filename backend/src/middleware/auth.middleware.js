@@ -8,7 +8,6 @@ export const authenticateUser = asyncHandler(async (req, _, next) => {
   try {
     const accessToken = req.cookies?.accessToken;
     if (!accessToken) {
-      // throw new ApiError(401, "Unauthorized request");
       if (renewToken(req, res)) {
         next();
       }

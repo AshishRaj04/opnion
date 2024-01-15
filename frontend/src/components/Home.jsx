@@ -1,7 +1,7 @@
 import  { useState , useEffect} from "react";
 import Axios from "axios";
 const Home = () => {
-  const url = "/home";
+  const url = "/home/postTweet";
   const [tweet, setTweet] = useState(" ");
 
   const handleChange = (event) => {
@@ -27,6 +27,7 @@ const Home = () => {
   };
   return (
     <div>
+      <p>Tweet your Opnion</p>
       <form onSubmit={handleSubmit}>
         <textarea
           onChange={handleChange}

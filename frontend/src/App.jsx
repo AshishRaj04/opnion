@@ -1,4 +1,4 @@
-import { Home, Navbar, Sidebar, Feed, Login, Register } from "./components";
+import { Home, Login, Register } from "./components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {

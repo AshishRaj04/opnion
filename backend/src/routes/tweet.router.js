@@ -1,9 +1,9 @@
 import { Router } from "express";
 import {postTweet} from "../controllers/tweet.controller.js"
-import {authenticateUser} from "../middleware/auth.middleware.js"
+import {authenticateUserAfterLogin} from "../middleware/index.js"
 const router = Router();
 
 
-router.route("/").post(authenticateUser , postTweet);
+router.route("/postTweet").post(authenticateUserAfterLogin , postTweet);
 
 export default router;

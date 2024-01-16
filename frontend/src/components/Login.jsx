@@ -30,12 +30,13 @@ const Login = () => {
       });
     } catch (error) {
       console.log("Error occured while logging the user ", error);
+      navigate("/")
     }
   };
 
   useEffect(()=>{
     if(isLoggedIn){
-      navigate('/home')
+      navigate('/dashboard')
     }
   },[isLoggedIn])
   return (

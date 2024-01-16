@@ -1,7 +1,7 @@
 import Home from "./Home";
 import Sidebar from "./Sidebar";
-import Feed from "./Feed";
+import Dashboard from "./Dashboard";
 import Login from "./Login";
 import Register from "./Register";
 
-export { Home, Sidebar, Feed, Register, Login };
+export { Home, Sidebar, Dashboard, Register, Login };

@@ -1,5 +1,6 @@
-import  { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 import Axios from "axios";
+
 const Dashboard = () => {
   const url = "/home/postTweet";
   const [tweet, setTweet] = useState(" ");
@@ -14,7 +15,7 @@ const Dashboard = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!tweet || tweet.trim() === "") return;
-    
+
     Axios.post(url, {
       content: tweet,
     })
@@ -43,3 +44,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+// {"_id":{"$oid":"659edfeb9d90417a8f6b9112"},"username":"ashishraj","email":"ar3243@gmail.com","fullName":"Ashish Raj","password":"$2b$10$Q0TkVvLr4ZS.ng.LxT1heewv7YB8BkkdxIHdTtAoXWswRLlPp.RuC","avatar":"http://res.cloudinary.com/dy9qlasxz/image/upload/v1704910824/mrhgukiizksnac9ob5vj.jpg","coverImage":"http://res.cloudinary.com/dy9qlasxz/image/upload/v1704910828/uf1e96wsh7ye74du5lxi.jpg","createdAt":{"$date":{"$numberLong":"1704910827398"}},"updatedAt":{"$date":{"$numberLong":"1705419973963"}},"__v":{"$numberInt":"0"},"refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTllZGZlYjlkOTA0MTdhOGY2YjkxMTIiLCJpYXQiOjE3MDU0MTk5NzMsImV4cCI6MTcwNTQyMDI3M30.e24hN-J5qzBxfaPhMjlFUkrwWSMaOBnpYZ6Qz7sNCRQ"}

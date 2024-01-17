@@ -36,7 +36,7 @@ const Login = () => {
 
   useEffect(()=>{
     if(isLoggedIn){
-      navigate('/dashboard')
+      navigate('/feed')
     }
   },[isLoggedIn])
   return (

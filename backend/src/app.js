@@ -25,7 +25,9 @@ app.use(cookieParser());
 
 import tweetRouter from "./routes/tweet.router.js";
 import userRouter from "./routes/user.router.js";
-//http://localhost:4000
+import feedRouter from "./routes/feed.router.js"
+//   http://localhost:4000
 app.use("/api/v1", userRouter);
 app.use("/home", tweetRouter);
+app.use("/home" , feedRouter)
 export { app };

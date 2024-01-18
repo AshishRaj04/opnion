@@ -52,7 +52,6 @@ const registerUser = asyncHandler(async (req, res) => {
   const coverImage = await uploadOnCloudnary(coverImageLocalPath);
 
   if (!(avatar && coverImage)) {
-    //delete local file after cloudinary error
     fs.unlinkSync(avatarLocalPath);
     fs.unlinkSync(coverImageLocalPath);
     throw new ApiError(
@@ -109,13 +108,15 @@ const loginUser = asyncHandler(async (req, res) => {
   );
 
   const option = {
+    maxAge: 300000,
     httpOnly: true,
     secure: true,
+    sameSite: "strict",
   };
 
   return res
     .status(200)
-    .cookie("accessToken", accessToken, option)
+    .cookie("accessToken", accessToken, { maxAge: 60000 })
     .cookie("refreshToken", refreshToken, option)
     .json(
       new ApiResponse(

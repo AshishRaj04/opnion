@@ -13,7 +13,7 @@ const authenticateUserAfterLogin = asyncHandler(async (req, res, next) => {
       if (exists) {
         next();
       } else {
-        next(new ApiError(401, "Authentication failed"));
+        throw new ApiError(401, "Authentication failed");
       }
     } else {
       const decodedToken = jwt.verify(
@@ -24,7 +24,7 @@ const authenticateUserAfterLogin = asyncHandler(async (req, res, next) => {
       next();
     }
   } catch (error) {
-    next(new ApiError(401, "Authentication failed"));
+    throw new ApiError(401, "Authentication failed");
   }
 });
 
@@ -33,7 +33,7 @@ const renewToken = async (req, res) => {
     const refreshToken = req.cookies?.refreshToken;
     let exists = false;
     if (!refreshToken) {
-      return new ApiError(401, "No Refresh Token");
+      throw new ApiError(401, "No Refresh Token");
     } else {
       const decodedToken = jwt.verify(
         refreshToken,
@@ -64,7 +64,7 @@ const renewToken = async (req, res) => {
       return exists;
     }
   } catch (error) {
-    return new ApiError(
+    throw new ApiError(
       500,
       "Server Error : while generating access token form refresh token"
     );

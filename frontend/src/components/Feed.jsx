@@ -1,5 +1,3 @@
-// Feed.js
-
 import React, { useState, useEffect } from "react";
 import { Navbar, Dashboard, Sidebar } from "./index.js";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +5,7 @@ import Axios from "axios";
 
 const Feed = () => {
   const [message, setMessage] = useState();
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false); // New state for sidebar visibility
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const navigate = useNavigate();
 
   Axios.defaults.withCredentials = true;
@@ -34,7 +32,7 @@ const Feed = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gray-100 flex-row justify-start">
       {/* <Sidebar isVisible={isSidebarVisible} toggleSidebar={toggleSidebar} /> */}
       <div className="flex-1 flex flex-col overflow-hidden">
         <Navbar toggleSidebar={toggleSidebar} />

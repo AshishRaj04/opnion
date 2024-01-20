@@ -13,8 +13,8 @@ const Feed = () => {
   useEffect(() => {
     Axios.get("/home/feed")
       .then((res) => {
-        console.log(res)
-        const {message} = res.data
+        console.log(res);
+        const { message } = res.data;
         if (res.status === 200) {
           setMessage(message);
         } else {
@@ -33,9 +33,7 @@ const Feed = () => {
 
   return (
     <div className="flex h-screen bg-gray-100 flex-row justify-start">
-      {/* <Sidebar isVisible={isSidebarVisible} toggleSidebar={toggleSidebar} /> */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        <Navbar toggleSidebar={toggleSidebar} />
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-500">
           <div className="container mx-auto p-4">
             <h1 className="text-3xl font-bold">Welcome to Opnion App</h1>

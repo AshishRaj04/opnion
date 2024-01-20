@@ -1,6 +1,5 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/apiError.js";
-import { ApiResponse } from "../utils/apiResponse.js";
 import jwt from "jsonwebtoken";
 import { User } from "../modles/user.model.js";
 
@@ -8,12 +7,15 @@ const authenticateUserAfterLogin = asyncHandler(async (req, res, next) => {
   try {
     const accessToken = req.cookies.accessToken;
     if (!accessToken) {
-      const  exists  = await renewToken(req, res);
+      const exists = await renewToken(req, res);
       console.log(exists);
       if (exists) {
         next();
       } else {
-        throw new ApiError(401, "Authentication failed");
+        throw new ApiError(
+          401,
+          "Authentication failed : access token not generated"
+        );
       }
     } else {
       const decodedToken = jwt.verify(
@@ -55,14 +57,10 @@ const renewToken = async (req, res) => {
         }
       );
       exists = true;
-      res
-        .status(200)
-        .cookies("accessToken", accessToken, { maxAge: 60000 })
-        .json(
-          new ApiResponse(200, { accessToken }, "new access token generated")
-        );
-      return exists;
+      console.log(accessToken);
+      res.cookies(accessToken, { maxAge: 60000 });
     }
+    return exists;
   } catch (error) {
     throw new ApiError(
       500,

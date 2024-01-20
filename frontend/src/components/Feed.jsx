@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Navbar, Dashboard, Sidebar } from "./index.js";
+import { Navbar, Dashboard, Sidebar , NewAcessToken} from "./index.js";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 
 const Feed = () => {
   const [message, setMessage] = useState();
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const navigate = useNavigate();
 
   Axios.defaults.withCredentials = true;
@@ -18,18 +17,15 @@ const Feed = () => {
         if (res.status === 200) {
           setMessage(message);
         } else {
-          navigate("/login");
+          navigate("/NewAcessToken");
         }
       })
       .catch((err) => {
         console.log(" error loading the page ", err);
-        navigate("/");
+        navigate("/NewAcessToken");
       });
   }, []);
 
-  const toggleSidebar = () => {
-    setIsSidebarVisible(!isSidebarVisible);
-  };
 
   return (
     <div className="flex h-screen bg-gray-100 flex-row justify-start">

@@ -8,12 +8,18 @@ const Register = () => {
     email: "",
     password: "",
     fullName: "",
+    avatar: "",
+    coverImage: "",
+  });
+  const [img, setImg] = useState({
+    
   });
   const [isRegistered, setIsRegistered] = useState(false);
   const navigate = useNavigate();
   const handleChange = (event) => {
     const { name, value } = event.target;
     setData((prevData) => ({ ...prevData, [name]: value }));
+    console.log(event.target.files)
   };
   const handelSubmit = async (event) => {
     event.preventDefault();
@@ -29,6 +35,11 @@ const Register = () => {
     } catch (error) {
       console.log("Error occuring while registering the user : ", error);
     }
+  };
+
+  const uploadFileHandler = async (e) => {
+    // console.log(e.target.files);
+    // setImg(e.target.files);
   };
 
   useEffect(() => {
@@ -84,6 +95,23 @@ const Register = () => {
           value={data.fullName}
           onChange={handleChange}
         ></input>
+        <br />
+        <label>Avatar: </label>
+        <input
+          type="file"
+          name="avatar"
+          accept=".png, .jpg, .jpeg"
+          onChange={uploadFileHandler}
+        />
+        <br />
+        <label>Cover Image: </label>
+        <input
+          type="file"
+          name="coverImage"
+          accept=".png, .jpg, .jpeg"
+          onChange={uploadFileHandler}
+        />
+
         <br />
         <button
           className="py-2 px-4 rounded-xl bg-slate-300 text-slate-900"

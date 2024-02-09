@@ -11,17 +11,19 @@ const Register = () => {
     avatar: "",
     coverImage: "",
   });
-  const [img, setImg] = useState({
-    
-  });
+
   const [isRegistered, setIsRegistered] = useState(false);
   const navigate = useNavigate();
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setData((prevData) => ({ ...prevData, [name]: value }));
-    console.log(event.target.files)
+    const { name, value, files } = event.target;
+    setData((prevData) => ({ ...prevData, [name]: value || files }));
   };
+
   const handelSubmit = async (event) => {
+    if (!data.avatar || !data.coverImage) {
+      console.error("Avatar and cover image are required fields");
+      return;
+    }
     event.preventDefault();
     const configuration = {
       method: "post",
@@ -37,10 +39,9 @@ const Register = () => {
     }
   };
 
-  const uploadFileHandler = async (e) => {
-    // console.log(e.target.files);
-    // setImg(e.target.files);
-  };
+  // const uploadFileHandler = async (e) => {
+
+  // };
 
   useEffect(() => {
     if (isRegistered) {
@@ -101,7 +102,7 @@ const Register = () => {
           type="file"
           name="avatar"
           accept=".png, .jpg, .jpeg"
-          onChange={uploadFileHandler}
+          onChange={handleChange}
         />
         <br />
         <label>Cover Image: </label>
@@ -109,7 +110,7 @@ const Register = () => {
           type="file"
           name="coverImage"
           accept=".png, .jpg, .jpeg"
-          onChange={uploadFileHandler}
+          onChange={handleChange}
         />
 
         <br />

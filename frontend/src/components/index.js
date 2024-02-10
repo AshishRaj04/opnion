@@ -6,5 +6,6 @@ import Register from "./Register";
 import Feed from "./Feed"
 import Navbar from "./Navbar"
 import NewAcessToken from "./NewAccessToken"
+import Card from "./Card"
 
-export { Home, Sidebar, Dashboard, Register, Login ,Feed ,Navbar , NewAcessToken};
+export { Home, Sidebar, Dashboard, Register, Login ,Feed ,Navbar , NewAcessToken ,Card};

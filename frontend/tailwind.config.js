@@ -10,7 +10,7 @@ export default {
       colors : {
         bgdark : "#1B1B1F",
         bglight : "#FFFFFF",
-        textdark : "#DFDFD6",
+        textdark : "#1e293b",
         textlight : "#3C3C43"
       }
     },

@@ -2,26 +2,30 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [active, isActive] = useState("");
-
   return (
     <>
-      <nav className="w-full py-1 px-4 mt-3  flex justify-between items-center  ">
+      <nav className="w-full px-8 py-3 flex justify-between items-center  shadow-md">
         <div className="">
-          <span className="font-poppins font-bold text-purple-500 text-2xl">
-            {" "}
-            Opn
-          </span>
-          <span className="font-poppins font-bold text-red-500 text-2xl">
-            ion
+          <span className=" font-bold text-[25px] font-crimson text-textdark">
+            {/* <img src="public/logo.svg" alt="logo" /> */}
+            Opnion
           </span>
         </div>
-        <div className="text-gray-900 font-medium">
-          <ul className="flex flex-row">
-            <li className="mx-2">About Us</li>
-            <li className="mx-2">Connect</li>
-            <li className="mx-2">Home</li>
-          </ul>
+        <div className="text-gray-900 font-medium font-sans">
+          <Link
+            to="/register"
+            className="transition-colors ring-offset-white font-medium text-sm px-3 bg-white border-slate-200 border rounded-md whitespace-nowrap justify-center items-center min-w-[80px] h-9 inline-flex ml-2 hover:bg-gray-100"
+          >
+            {" "}
+            Register{" "}
+          </Link>
+          <Link
+            to="/login"
+            className="transition-colors ring-offset-white font-medium text-sm px-3 bg-white border-slate-200 border rounded-md whitespace-nowrap justify-center items-center min-w-[80px] h-9 inline-flex ml-2 hover:bg-gray-100"
+          >
+            {" "}
+            Login{" "}
+          </Link>
         </div>
       </nav>
     </>

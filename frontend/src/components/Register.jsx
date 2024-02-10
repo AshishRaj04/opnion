@@ -11,51 +11,61 @@ const Register = () => {
     avatar: null,
     coverImage: null,
   });
+  const [message, setMessage] = useState(null);
+  const [progress, setProgress] = useState({ started: false, percentage: 0 });
 
   const [isRegistered, setIsRegistered] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setData((prevData) => ({ ...prevData, [name]: value }));
+    setData((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleFileChange = (event) => {
     const { name, files } = event.target;
-    console.log(files)
-    setData((prevData) => ({ ...prevData, [name]: files[0] }));
+    console.log(files);
+    setData((prevState) => ({ ...prevState, [name]: files[0] }));
   };
 
   const handelSubmit = async (event) => {
     event.preventDefault();
     if (!data.avatar || !data.coverImage) {
-      console.error("Avatar and cover image are required fields");
+      setMessage("Avatar and cover image are required fields");
       return;
     }
 
     const formData = new FormData();
-    formData.append("username", data.username);
-    formData.append("email", data.email);
-    formData.append("password", data.password);
-    formData.append("fullName", data.fullName);
-    formData.append("avatar", data.avatar);
-    formData.append("coverImage", data.coverImage);
-
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+    setMessage("Uploading...");
+    setProgress((prevState) => {
+      return { ...prevState, started: true };
+    });
     const configuration = {
       url: "/api/v1/registerUser",
       data: formData,
       method: "POST",
       headers: { "Content-Type": "multipart/form-data" },
+      onUploadProgress: (progressEvent) => {
+        setProgress((prevState) => {
+          return { ...prevState, percentage: progressEvent.progress * 100 };
+        });
+      },
     };
 
     try {
-      const result = await axios(configuration);
-      console.log(result.data);
-      setIsRegistered(true);
+       await axios(configuration)
+      .then((res) => {
+        setMessage("Upload successfull");
+        console.log(res.data);
+        setIsRegistered(true);
+      });
     } catch (error) {
+      setMessage("Upload failed");
       console.error("Error occurred while registering the user:", error);
     }
-
   };
 
   useEffect(() => {
@@ -65,7 +75,7 @@ const Register = () => {
   }, [isRegistered]);
 
   return (
-    <div>
+    <div className="bg-bgdark w-full h-[100dvh] ">
       <p>Register</p>
 
       <form onSubmit={handelSubmit}>
@@ -137,6 +147,10 @@ const Register = () => {
           Submit
         </button>
       </form>
+      <div>
+        {progress.started && <progress max="100" value={progress.percentage} />}
+        {message && <span>{message}</span>}
+      </div>
       <div>
         {isRegistered ? (
           <p className="text-green-500">

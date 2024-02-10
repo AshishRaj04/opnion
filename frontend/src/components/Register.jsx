@@ -8,40 +8,55 @@ const Register = () => {
     email: "",
     password: "",
     fullName: "",
-    avatar: "",
-    coverImage: "",
+    avatar: null,
+    coverImage: null,
   });
 
   const [isRegistered, setIsRegistered] = useState(false);
   const navigate = useNavigate();
+
   const handleChange = (event) => {
-    const { name, value, files } = event.target;
-    setData((prevData) => ({ ...prevData, [name]: value || files }));
+    const { name, value } = event.target;
+    setData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleFileChange = (event) => {
+    const { name, files } = event.target;
+    console.log(files)
+    setData((prevData) => ({ ...prevData, [name]: files[0] }));
   };
 
   const handelSubmit = async (event) => {
+    event.preventDefault();
     if (!data.avatar || !data.coverImage) {
       console.error("Avatar and cover image are required fields");
       return;
     }
-    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("username", data.username);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("fullName", data.fullName);
+    formData.append("avatar", data.avatar);
+    formData.append("coverImage", data.coverImage);
+
     const configuration = {
-      method: "post",
       url: "/api/v1/registerUser",
-      data: data,
+      data: formData,
+      method: "POST",
+      headers: { "Content-Type": "multipart/form-data" },
     };
+
     try {
-      await axios(configuration).then((result) => {
-        setIsRegistered(true);
-      });
+      const result = await axios(configuration);
+      console.log(result.data);
+      setIsRegistered(true);
     } catch (error) {
-      console.log("Error occuring while registering the user : ", error);
+      console.error("Error occurred while registering the user:", error);
     }
+
   };
-
-  // const uploadFileHandler = async (e) => {
-
-  // };
 
   useEffect(() => {
     if (isRegistered) {
@@ -102,7 +117,7 @@ const Register = () => {
           type="file"
           name="avatar"
           accept=".png, .jpg, .jpeg"
-          onChange={handleChange}
+          onChange={handleFileChange}
         />
         <br />
         <label>Cover Image: </label>
@@ -110,7 +125,7 @@ const Register = () => {
           type="file"
           name="coverImage"
           accept=".png, .jpg, .jpeg"
-          onChange={handleChange}
+          onChange={handleFileChange}
         />
 
         <br />

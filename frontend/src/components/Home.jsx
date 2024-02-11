@@ -23,7 +23,7 @@ const Home = () => {
           conversation!
         </p>
 
-        <button class="md:mb-0 transition-colors ring-offset-white text-slate-50 font-medium text-sm px-8 py-3 bg-slate-900 rounded-md whitespace-nowrap justify-center items-center h-11 inline-flex hover:bg-gray-800 mt-10">
+        <button className="md:mb-0 transition-colors ring-offset-white text-slate-50 font-medium text-sm px-8 py-3 bg-slate-900 rounded-md whitespace-nowrap justify-center items-center h-11 inline-flex hover:bg-gray-800 mt-10">
           Let's Connect
         </button>
       </div>

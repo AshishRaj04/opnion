@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { logo } from "../assets";
 
 const Navbar = () => {
   return (
     <>
       <nav className="w-full px-8 py-3 flex justify-between items-center  shadow-md">
-        <div className="">
+        <div className="flex">
+          <img src={logo} alt="logo" className="h-8 w-auto" />
           <span className=" font-bold text-[25px] font-crimson text-textdark">
-            {/* <img src="public/logo.svg" alt="logo" /> */}
             Opnion
           </span>
         </div>

@@ -27,25 +27,18 @@ const Home = () => {
           Let's Connect
         </button>
       </div>
-
-     
-        <p className="text-slate-500 font-poppins text-center text-[18px]">
-                Unlock a{" "}
-                <span className="font-bold text-textdark text-[20px]">
-                  world of innovation
-                </span>{" "}
-                and explore the diverse{" "}
-                <span className="font-bold text-textdark text-[20px]">
-                  range of exciting features
-                </span>{" "}
-                awaiting you.
-              </p>
-     
-      
-       
-      
-      
-      <div className="flex flex-col justify-start items-center  pt-[5%]">
+      <div class="container py-20 lg:py-24 2xl:py-32  px-16">
+        <p className="text-slate-500 font-poppins text-start text-[14px] mb-4">
+          Unlock a{" "}
+          <span className="font-bold text-textdark text-[16px]">
+            world of innovation
+          </span>{" "}
+          and explore the diverse{" "}
+          <span className="font-bold text-textdark text-[16px]">
+            range of exciting features
+          </span>{" "}
+          awaiting you.
+        </p>
         <Card />
       </div>
     </>

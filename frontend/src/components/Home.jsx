@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Card } from "./index.js";
+import { Navbar, Card , Footer } from "./index.js";
 
 const Home = () => {
   return (
@@ -27,7 +27,7 @@ const Home = () => {
           Let's Connect
         </button>
       </div>
-      <div class="container py-20 lg:py-24 2xl:py-32  px-16">
+      <div className="container py-20 lg:py-24 2xl:py-32  px-16">
         <p className="text-slate-500 font-poppins text-start text-[14px] mb-4">
           Unlock a{" "}
           <span className="font-bold text-textdark text-[16px]">
@@ -41,6 +41,7 @@ const Home = () => {
         </p>
         <Card />
       </div>
+      <Footer />
     </>
   );
 };

@@ -7,5 +7,6 @@ import Feed from "./Feed"
 import Navbar from "./Navbar"
 import NewAcessToken from "./NewAccessToken"
 import Card from "./Card"
+import Footer from "./Footer"
 
-export { Home, Sidebar, Dashboard, Register, Login ,Feed ,Navbar , NewAcessToken ,Card};
+export { Home, Sidebar, Dashboard, Register, Login ,Feed ,Navbar , NewAcessToken ,Card ,Footer};

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Navbar, Dashboard, Sidebar , NewAcessToken} from "./index.js";
+import { Dashboard, NewAcessToken } from "./index.js";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 
@@ -10,22 +10,24 @@ const Feed = () => {
   Axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    Axios.get("/home/feed")
-      .then((res) => {
-        console.log(res);
-        const { message } = res.data;
-        if (res.status === 200) {
-          setMessage(message);
-        } else {
-          navigate("/NewAcessToken");
-        }
-      })
-      .catch((err) => {
-        console.log(" error loading the page ", err);
-        navigate("/NewAcessToken");
-      });
+    const proceed = async () => {
+      await Axios.get("/home/feed")
+        .then((res) => {
+          console.log(res);
+          const { message } = res.data;
+          if (res.status === 200) {
+            setMessage(message);
+          } else {
+            navigate("/newAccessToken");
+          }
+        })
+        .catch((err) => {
+          console.log(" error loading the page ", err);
+          navigate("/newAccessToken");
+        });
+    };
+    proceed();
   }, []);
-
 
   return (
     <div className="flex h-screen bg-gray-100 flex-row justify-start">

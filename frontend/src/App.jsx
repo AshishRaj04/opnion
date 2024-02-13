@@ -1,4 +1,4 @@
-import { Login, Register, Home, Feed } from "./components";
+import { Login, Register, Home, Feed , NewAcessToken} from "./components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
         <Route path="/feed" element={<Feed />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/newAccessToken" element={<NewAcessToken />} />
       </Routes>
     </BrowserRouter>
   );

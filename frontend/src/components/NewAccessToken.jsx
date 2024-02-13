@@ -1,36 +1,30 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const NewAcessToken = () => {
-  const [message, setMessage] = useState({});
-  useEffect(() => {
-    const refreshAccessToken = async () => {
-      try {
-        const response = await axios.post(
-          "http://localhost:4000/api/v1/refreshToken"
-        );
-        const { accessToken, refreshToken } = response.data;
-        setMessage(
-          `New Access Token is ${accessToken} and new Refresh Token is ${refreshToken}`
-        );
-        // Store the new tokens in your application state or context
-        // You can use your state management library or context API for this
-        console.log("New Access Token:", accessToken);
-        console.log("New Refresh Token:", refreshToken);
-      } catch (error) {
-        // Handle errors, e.g., redirect to login page
-        console.error("Error refreshing access token:", error.message);
-      }
-    };
-
-    // Call the function to refresh the access token
-    refreshAccessToken();
-  }, []); // Run once when the component mounts
-
+const NewAcessToken = async (event) => {
+  // const generateToken = (e) => {
+  //   e.preventDefault();
+  //   console.log("Generate Token Clicked");
+  //   const configuration = {
+  //     method: "POST",
+  //     url: "/api/v1/refreshToken",
+  //   };
+  //   try {
+  //     axios(configuration).then((res) => console.log(res.data));
+  //   } catch (error) {
+  //     console.error("Error: ", error);
+  //   }
+  // };
   return (
     <div>
-      <h1>NewAcessToken</h1>
-      <p>{message}</p>
+      <h1>Generate New Access Token</h1>
+      <button
+        className="px-4 py-2 bg-slate-400 rounded-md "
+        // onClick={generateToken}
+      >
+        Generate Token
+      </button>
+      {/* <p>{message}</p> */}
     </div>
   );
 };

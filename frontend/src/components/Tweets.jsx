@@ -3,22 +3,24 @@ import axios from "axios";
 const Tweets = () => {
   const [tweets, setTweets] = useState([]);
 
-  // Fetch tweets on component mount and update state with the fetched data.
   useEffect(() => {
-    const getTweetsFun = async () => {
-      const configuration = {
-        method: "GET",
-        url: "/home/getTweets",
-      };
-      await axios(configuration).then((response) => {
-        setTweets(response.data);
-      });
+    axios
+      .get("/home/getTweets")
+      .then((tweets) => {
+        const data = tweets.data.data;
 
-    };
-
-    getTweetsFun()
+        setTweets(data);
+      })
+      .catch((err) => console.log(err));
   }, []);
-  return <div>{tweets}</div>;
+
+  return (
+    <div>
+      {tweets.map((item, index) => {
+        return <ol key={index}>{item.content}</ol>;
+      })}
+    </div>
+  );
 };
 
 export default Tweets;

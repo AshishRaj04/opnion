@@ -17,7 +17,7 @@ const postTweet = asyncHandler(async (req, res) => {
       content: content,
     });
 
-    const newTweet = await Tweet.findById(createdTweet._id)
+    const newTweet = await Tweet.findById(createdTweet._id);
 
     if (!newTweet) {
       throw new ApiError(502, "Server Error");
@@ -31,13 +31,12 @@ const postTweet = asyncHandler(async (req, res) => {
   }
 });
 
-const getTweets = asyncHandler(async(req , res)=>{
-  const tweets = await Tweet.find({content})
- console.log("DOne")
-  // .sort({date:-1})
-  // .populate('user', 'name')
-  // console.log("tweets")
-  return res.status(200).json(new ApiResponse(200, tweets));
+const getTweets = asyncHandler(async (req, res) => {
+  const alltweets = await Tweet.find()
+    return res
+    .status(200)
+    .json(new ApiResponse(200 , alltweets , "All Tweets are sent"))
+  
+});
 
-})
-export { postTweet , getTweets};
+export { postTweet, getTweets };

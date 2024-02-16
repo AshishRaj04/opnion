@@ -17,7 +17,16 @@ const Tweets = () => {
   return (
     <div>
       {tweets.map((item, index) => {
-        return <ol key={index}>{item.content}</ol>;
+        return (
+          <div
+            key={index}
+            className="w-[70%] mb-4 rounded-md text-center border-y-2 py-6 bg-gray-50 dark:bg-dark-1"
+          >
+            <p>{item.content}</p>
+            <button className="mx-8 ">💬</button>
+            <button className="mx-8 ">👍</button>
+          </div>
+        );
       })}
     </div>
   );

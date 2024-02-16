@@ -8,5 +8,6 @@ import Navbar from "./Navbar"
 import NewAcessToken from "./NewAccessToken"
 import Card from "./Card"
 import Footer from "./Footer"
+import Tweets from "./Tweets"
 
-export { Home, Sidebar, Dashboard, Register, Login ,Feed ,Navbar , NewAcessToken ,Card ,Footer};
+export { Home, Sidebar, Dashboard, Register, Login ,Feed ,Navbar , NewAcessToken ,Card ,Footer , Tweets};

@@ -31,4 +31,13 @@ const postTweet = asyncHandler(async (req, res) => {
   }
 });
 
-export { postTweet };
+const getTweets = asyncHandler(async(req , res)=>{
+  const tweets = await Tweet.find({content})
+ console.log("DOne")
+  // .sort({date:-1})
+  // .populate('user', 'name')
+  // console.log("tweets")
+  return res.status(200).json(new ApiResponse(200, tweets));
+
+})
+export { postTweet , getTweets};

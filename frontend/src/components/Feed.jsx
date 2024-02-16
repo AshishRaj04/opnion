@@ -1,34 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { Dashboard, NewAcessToken } from "./index.js";
+import { Dashboard } from "./index.js";
 import { useNavigate } from "react-router-dom";
-import Axios from "axios";
+import axios from "axios";
 
 const Feed = () => {
   const [message, setMessage] = useState();
   const navigate = useNavigate();
 
-  Axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = true;
 
-  useEffect(() => {
-    const proceed = async () => {
-      await Axios.get("/home/feed")
-        .then((res) => {
-          console.log(res);
-          const { message } = res.data;
-          if (res.status === 200) {
-            setMessage(message);
-          } else {
-            navigate("/newAccessToken");
-          }
-        })
-        .catch((err) => {
-          console.log(" error loading the page ", err);
-          navigate("/newAccessToken");
-        });
-    };
-    proceed();
-  }, []);
-
+  useEffect(()=>{
+    const fetchData = async () => {
+      try{
+        const response = await axios.get('/home/feed')
+        console,log(response.data)
+        setMessage(response.data.message);
+      }catch(error){
+        if(error.response && error.response.status === 401){
+          navigate("/newAccessToken")
+        }
+      }
+    }
+    fetchData();
+  },[])
   return (
     <div className="flex h-screen bg-gray-100 flex-row justify-start">
       <div className="flex-1 flex flex-col overflow-hidden">

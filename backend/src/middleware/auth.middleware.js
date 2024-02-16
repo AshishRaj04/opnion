@@ -3,23 +3,28 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { User } from "../modles/user.model.js";
 import jwt from "jsonwebtoken";
 
-const authenticateUser = asyncHandler(async (req, _ , next) => {
+const authenticateUser = asyncHandler(async (req, res, next) => {
   try {
-    const accessToken = req.cookies?.accessToken;
-    if (!accessToken) {
-      throw new ApiError(401, "No access token exists");
-    }
-    const decodeToken = jwt.verify(
-      accessToken,
-      process.env.ACCESS_TOKEN_SECRET
-    );
-    const userId = decodeToken._id;
-    const user = User.findById(userId).select("-password  -refreshToken");
+    const token =
+      req.cookies.accessToken 
 
-    if (!user) {
-      throw new ApiError(401, "user does not exist");
+    console.log(token);
+
+    if (!token) {
+      throw new ApiError(401 , "Invalid  Token, Please Login Again!");
     }
+
+    const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    let userId = decodedToken._id;
+    console.log(userId);
+    const user = await User.findById(userId).select("-password -refreshToken");
+    console.log(user);
+    if (!user) {
+      throw new ApiError(401, "Invalid Access Token");
+    }
+
     req.user = user;
+
     next();
   } catch (error) {
     throw new ApiError(401, error?.message || "Invalid access token");

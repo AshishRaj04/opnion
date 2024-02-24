@@ -116,7 +116,12 @@ const loginUser = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .cookie("accessToken", accessToken, { maxAge: 30000 })
+    .cookie("accessToken", accessToken, {
+      maxAge: 30000,
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+    })
     .cookie("refreshToken", refreshToken, option)
     .json(
       new ApiResponse(
@@ -179,7 +184,12 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     );
     return res
       .status(200)
-      .cookie("accessToken", newAccessToken, { maxAge: 30000 })
+      .cookie("accessToken", newAccessToken, {
+        maxAge: 30000,
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict",
+      })
       .cookie("refreshToken", newRefreshToken, option)
       .json(
         new ApiResponse(
@@ -195,4 +205,4 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     throw new ApiError(401, error?.message || "Invalid Refresh Token");
   }
 });
-export { registerUser, loginUser, logoutUser ,refreshAccessToken};
+export { registerUser, loginUser, logoutUser, refreshAccessToken };

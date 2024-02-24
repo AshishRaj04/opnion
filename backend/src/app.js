@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import varifyUser from "./middleware/logger.middleware.js";
 
 const app = express();
 
@@ -29,6 +30,9 @@ import feedRouter from "./routes/feed.router.js"
 //   http://localhost:4000
 app.use("/api/v1", userRouter);
 app.use("/home", tweetRouter);
-app.use("/home" , feedRouter)
+// app.use("/home" , feedRouter)
+app.get("/home/feed" , varifyUser , (req , res)=> {
+  return res.status(200).json({valid : true , message : "authorized"})
+})
 export { app };
  

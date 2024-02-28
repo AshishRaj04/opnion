@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { registration } from "../assets/index.js";
 
 const Register = () => {
   const [data, setData] = useState({
@@ -56,8 +57,7 @@ const Register = () => {
     };
 
     try {
-       await axios(configuration)
-      .then((res) => {
+      await axios(configuration).then((res) => {
         setMessage("Upload successfull");
         console.log(res.data);
         setIsRegistered(true);
@@ -79,66 +79,73 @@ const Register = () => {
       <p>Register</p>
 
       <form onSubmit={handelSubmit}>
-        <label>usename : </label>
-        <input
-          type="text"
-          placeholder="username"
-          name="username"
-          className="my-2 text-slate-900"
-          value={data.username}
-          onChange={handleChange}
-        ></input>
-        <br />
+        <div>
+          <label>usename : </label>
+          <input
+            type="text"
+            placeholder="username"
+            name="username"
+            className="my-2 text-slate-900"
+            value={data.username}
+            onChange={handleChange}
+          ></input>
+        </div>
 
-        <label>email : </label>
-        <input
-          type="email"
-          placeholder="email"
-          name="email"
-          className="my-2  text-slate-900"
-          value={data.email}
-          onChange={handleChange}
-        ></input>
-        <br />
+        <div>
+          <label>email : </label>
+          <input
+            type="email"
+            placeholder="email"
+            name="email"
+            className="my-2  text-slate-900"
+            value={data.email}
+            onChange={handleChange}
+          ></input>
+        </div>
 
-        <label>password : </label>
-        <input
-          type="password"
-          placeholder="password"
-          name="password"
-          className="my-2  text-slate-900"
-          value={data.password}
-          onChange={handleChange}
-        ></input>
-        <br />
+        <div>
+          <label>password : </label>
+          <input
+            type="password"
+            placeholder="password"
+            name="password"
+            className="my-2  text-slate-900"
+            value={data.password}
+            onChange={handleChange}
+          ></input>
+        </div>
 
-        <label>Full-Name: </label>
-        <input
-          type="text"
-          placeholder="fullname"
-          name="fullName"
-          className="my-2  text-slate-900"
-          value={data.fullName}
-          onChange={handleChange}
-        ></input>
-        <br />
-        <label>Avatar: </label>
-        <input
-          type="file"
-          name="avatar"
-          accept=".png, .jpg, .jpeg"
-          onChange={handleFileChange}
-        />
-        <br />
-        <label>Cover Image: </label>
-        <input
-          type="file"
-          name="coverImage"
-          accept=".png, .jpg, .jpeg"
-          onChange={handleFileChange}
-        />
+        <div>
+          <label>Full-Name: </label>
+          <input
+            type="text"
+            placeholder="fullname"
+            name="fullName"
+            className="my-2  text-slate-900"
+            value={data.fullName}
+            onChange={handleChange}
+          ></input>
+        </div>
 
-        <br />
+        <div>
+          <label>Avatar: </label>
+          <input
+            type="file"
+            name="avatar"
+            accept=".png, .jpg, .jpeg"
+            onChange={handleFileChange}
+          />
+        </div>
+
+        <div>
+          <label>Cover Image: </label>
+          <input
+            type="file"
+            name="coverImage"
+            accept=".png, .jpg, .jpeg"
+            onChange={handleFileChange}
+          />
+        </div>
         <button
           className="py-2 px-4 rounded-xl bg-slate-300 text-slate-900"
           type="submit"

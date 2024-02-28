@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 import { User } from "../modles/user.model.js";
+import { ApiError } from "../utils/apiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 const generateAccessAndRefreshToken = async (userId) => {
   try {
@@ -15,10 +17,13 @@ const generateAccessAndRefreshToken = async (userId) => {
   }
 };
 
-const varifyUser = async (req, res, next) => {
-  const accesstoken = req.cookies.accessToken;
+const verifyUser = asyncHandler(async (req, res, next) => {
+  const accesstoken =
+    req.cookies.accessToken ||
+    req.header("Authorization")?.replace("Bearer ", "");
+
   if (!accesstoken) {
-    if (renewToken(req, res)) {
+    if (await renewToken(req, res)) {
       next();
     }
   } else {
@@ -30,20 +35,19 @@ const varifyUser = async (req, res, next) => {
       }
     });
   }
-};
+});
 
 const renewToken = async (req, res) => {
   const refreshtoken = req.cookies.refreshToken;
   let exist = false;
   if (!refreshtoken) {
-    return res.json({ valid: false, message: "No refresh token" });
+    throw new ApiError(401, "unauthorized request");
   } else {
     const decodedToken = jwt.verify(
       refreshtoken,
       process.env.REFRESH_TOKEN_SECRET
     );
     const userId = decodedToken._id;
-    // const user = await User.findById(userId).select("-password -refreshToken");
     const { newAccessToken, newRefreshToken } =
       generateAccessAndRefreshToken(userId);
 
@@ -59,9 +63,9 @@ const renewToken = async (req, res) => {
       secure: true,
       sameSite: "strict",
     });
-    exist = true
+    exist = true;
   }
   return exist;
 };
 
-export default varifyUser;
+export default verifyUser;

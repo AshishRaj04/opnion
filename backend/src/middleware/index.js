@@ -1,3 +1,3 @@
 import authenticateUser from "./auth.middleware.js";
-
-export { authenticateUser };
+import verifyUser from "./logger.middleware.js";
+export { authenticateUser , verifyUser };

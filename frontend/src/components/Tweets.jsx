@@ -24,7 +24,7 @@ const Tweets = () => {
           >
             <p>{item.content}</p>
             <button className="mx-8 ">💬</button>
-            <button className="mx-8 ">👍</button>
+            <button className="mx-8 " onClick={()=>{}}>👍</button>
           </div>
         );
       })}

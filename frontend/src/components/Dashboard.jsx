@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import {Tweets} from "./index.js"
 import Axios from "axios";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const url = "/home/postTweet";
   const [tweet, setTweet] = useState(" ");
 
@@ -19,6 +19,7 @@ const Dashboard = () => {
 
     Axios.post(url, {
       content: tweet,
+      owner : props.id
     })
       .then((res) => {
         console.log(res.data);
@@ -41,7 +42,7 @@ const Dashboard = () => {
         </button>
       </form>
       <div>
-        <Tweets />
+        <Tweets/>
       </div>
     </div>
   );

@@ -23,8 +23,13 @@ const Tweets = () => {
             className="w-[70%] mb-4 rounded-md text-center border-y-2 py-6 bg-gray-50 dark:bg-dark-1"
           >
             <p>{item.content}</p>
+            {console.log(item.owner)}
+            <p> {item.owner.fullName}</p>
+            <img src={item.owner.avatar} alt="" className="w-8 h-8 rounded-full mx-auto my-3" />
             <button className="mx-8 ">💬</button>
-            <button className="mx-8 " onClick={()=>{}}>👍</button>
+            <button className="mx-8 " onClick={() => {}}>
+              👍
+            </button>
           </div>
         );
       })}

@@ -48,16 +48,16 @@ const renewToken = async (req, res) => {
       process.env.REFRESH_TOKEN_SECRET
     );
     const userId = decodedToken._id;
-    const { newAccessToken, newRefreshToken } =
-      generateAccessAndRefreshToken(userId);
+    const { accessToken, refreshToken } =
+     await generateAccessAndRefreshToken(userId);
 
-    res.cookie("accessToken", newAccessToken, {
+    res.cookie("accessToken", accessToken, {
       maxAge: 30000,
       httpOnly: true,
       secure: true,
       sameSite: "strict",
     });
-    res.cookie("refreshToken", newRefreshToken, {
+    res.cookie("refreshToken", refreshToken, {
       maxAge: 120000,
       httpOnly: true,
       secure: true,

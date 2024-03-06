@@ -9,6 +9,7 @@ const Login = () => {
   });
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState(null);
 
   const navigate = useNavigate();
 
@@ -26,19 +27,23 @@ const Login = () => {
     };
     try {
       await axios(configuration).then((result) => {
+        const { _id, username, fullName, avatar } =
+          result.data.data.existingUser;
+
+        setUserData(_id);
         setIsLoggedIn(true);
       });
     } catch (error) {
       console.log("Error occured while logging the user ", error);
-      navigate("/")
+      navigate("/");
     }
   };
 
-  useEffect(()=>{
-    if(isLoggedIn){
-      navigate('/feed')
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate(`/feed?userData=${userData}`);
     }
-  },[isLoggedIn])
+  }, [isLoggedIn]);
   return (
     <>
       <div>

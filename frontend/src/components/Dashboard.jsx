@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {Tweets} from "./index.js"
+import { Tweets } from "./index.js";
 import Axios from "axios";
 
 const Dashboard = (props) => {
@@ -8,8 +8,6 @@ const Dashboard = (props) => {
 
   const handleChange = (event) => {
     const { value } = event.target;
-    console.log(value);
-
     setTweet(value);
   };
 
@@ -19,7 +17,7 @@ const Dashboard = (props) => {
 
     Axios.post(url, {
       content: tweet,
-      owner : props.id
+      owner: props.id,
     })
       .then((res) => {
         console.log(res.data);
@@ -42,11 +40,10 @@ const Dashboard = (props) => {
         </button>
       </form>
       <div>
-        <Tweets/>
+        <Tweets />
       </div>
     </div>
   );
 };
 
 export default Dashboard;
-

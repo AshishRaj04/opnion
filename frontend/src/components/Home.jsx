@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Card , Footer } from "./index.js";
+import { Navbar, Card, Footer } from "./index.js";
 
 const Home = () => {
   return (

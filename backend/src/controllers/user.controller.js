@@ -25,7 +25,7 @@ const generateAccessAndRefreshToken = async (userId) => {
 };
 
 const option = {
-  maxAge: 172800000,
+  maxAge: 120000,
   httpOnly: true,
   secure: true,
   sameSite: "strict",
@@ -117,7 +117,7 @@ const loginUser = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .cookie("accessToken", accessToken, {
-      maxAge: 7200000,
+      maxAge: 30000,
       httpOnly: true,
       secure: true,
       sameSite: "strict",
@@ -185,7 +185,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     return res
       .status(200)
       .cookie("accessToken", newAccessToken, {
-        maxAge: 7200000,
+        maxAge: 30000,
         httpOnly: true,
         secure: true,
         sameSite: "strict",

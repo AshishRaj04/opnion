@@ -8,7 +8,9 @@ import { ApiResponse } from "../utils/apiResponse.js";
 const toggleTweetLike = asyncHandler(async (req, res) => {
   const { tweetId } = req.params;
   const tweet = await Tweet.findById(tweetId);
+  console.log(tweet);
   const user_id = req.user._id;
+  console.log(user_id)
   if (!tweet) {
     throw new ApiError(401, "Tweet does not exists");
   }

@@ -9,7 +9,6 @@ const Tweets = () => {
       .get("/home/getTweets")
       .then((response) => {
         const data = response.data.data;
-        console.log(data)
         setTweets(data);
       })
       .catch((err) => console.log(err));

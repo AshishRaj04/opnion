@@ -52,13 +52,13 @@ const renewToken = async (req, res) => {
      await generateAccessAndRefreshToken(userId);
 
     res.cookie("accessToken", accessToken, {
-      maxAge: 30000,
+      maxAge: 24 * 60 * 60,
       httpOnly: true,
       secure: true,
       sameSite: "strict",
     });
     res.cookie("refreshToken", refreshToken, {
-      maxAge: 120000,
+      maxAge: 5 * 24 * 60 * 60,
       httpOnly: true,
       secure: true,
       sameSite: "strict",

@@ -3,6 +3,6 @@ import {feedController} from "../controllers/feed.controller.js"
 import {verifyUser} from "../middleware/index.js"
 const router = Router();
 
-router.route("/feed").get(verifyUser , feedController);
+router.route("/feed").get( feedController);
 
 export default router

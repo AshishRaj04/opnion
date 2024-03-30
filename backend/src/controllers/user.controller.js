@@ -7,7 +7,6 @@ import {
   deleteFromCloudinary,
 } from "../utils/cloudinary.js";
 import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
 import fs from "fs";
 
 const generateAccessAndRefreshToken = async (userId) => {
@@ -25,7 +24,7 @@ const generateAccessAndRefreshToken = async (userId) => {
 };
 
 const option = {
-  maxAge: 120000,
+  maxAge: 5 * 24 * 60 * 60,
   httpOnly: true,
   secure: true,
   sameSite: "strict",
@@ -117,7 +116,7 @@ const loginUser = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .cookie("accessToken", accessToken, {
-      maxAge: 30000,
+      maxAge: 24 * 60 * 60,
       httpOnly: true,
       secure: true,
       sameSite: "strict",
@@ -185,7 +184,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     return res
       .status(200)
       .cookie("accessToken", newAccessToken, {
-        maxAge: 30000,
+        maxAge: 24 * 60 * 60,
         httpOnly: true,
         secure: true,
         sameSite: "strict",

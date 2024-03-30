@@ -10,18 +10,21 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
   const tweet = await Tweet.findById(tweetId);
   console.log(tweet);
   const user_id = req.user._id;
-  console.log(user_id)
+  // console.log(user_id)
   if (!tweet) {
     throw new ApiError(401, "Tweet does not exists");
   }
   const existingLike = Like.findOne({ tweet: tweetId, likedBy: user_id });
+  console.log(existingLike.findOne({likedBy}))
   if (existingLike) {
+    // console.log(existingLike)
     await existingLike.deleteOne({ tweet: tweetId, likedBy: user_id });
     const numberOfLikes = await Like.countDocuments({ tweet: tweetId });
     res
       .status(200)
       .json(new ApiResponse(200, { likeCount: numberOfLikes }, "Unliked"));
   } else {
+    // console.log(existingLike)
     const newLike = new Like({ tweet: tweetId, likedBy: user_id });
     await newLike.save();
     const numberOfLikes = await Like.countDocuments({ tweet: tweetId });
